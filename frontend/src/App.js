@@ -2,7 +2,7 @@
 import React, { Component }  from 'react';
 import WeekPlanner from './resources/WeekPlanner.js';
 import Sidebar from './resources/SideBar';
-import NumberInput from './resources/NumberInput';
+
 import './App.css'; // You can add global styles here
 
 
@@ -24,8 +24,7 @@ render() {
     <div className="app">
       <Sidebar />
       <WeekPlanner />
-      <NumberInput />
-	  
+     
     </div>
 	</main>
   );

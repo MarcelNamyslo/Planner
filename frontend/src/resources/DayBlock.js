@@ -17,11 +17,13 @@ class DayBlock extends Component {
         completed: false
       },
       tasklist: [
-        { text: 'Item 1', checked: false, time: '10:00 AM' },
-        { text: 'Item 2', checked: false, time: '2:30 PM' },
-        { text: 'Item 3', checked: false, time: '4:45 PM' },
+        
       ],
     };
+  }
+
+  componentDidMount() {
+    this.refreshList();
   }
 
   handleCheckboxChange = (index) => {
@@ -54,12 +56,7 @@ class DayBlock extends Component {
     this.setState({ modal: !this.state.modal });
   };
 
-  refreshList = () => {
-    axios //Axios to send and receive HTTP requests
-    .get("http://localhost:8000/api/tasks/")
-    .then(res => this.setState({ taskList: res.data }))
-    .catch(err => console.log(err));
-  };
+  
 
   // Submit an item
 handleSubmit = (item) => {
@@ -84,18 +81,31 @@ handleSubmit = (item) => {
 	.then((res) => this.refreshList());
 };
 
+refreshList = () => {
+	axios //Axios to send and receive HTTP requests
+	.get("http://localhost:8000/api/tasks/")
+	.then(res => this.setState({ tasklist: res.data }))
+	.catch(err => console.log(err));
+};
+
 
   render() {
     return (
       <div className="day-block">
         <h2>{this.state.day}</h2>
+        <button
+                onClick={() => this.toggleForm()}
+              >
+                +
+              </button>
         <ul className="todolist">
           {this.state.tasklist.map((item, index) => (
             <li
-              key={index}
-              onMouseEnter={() => this.handleMouseEnter(index)}
-              onMouseLeave={() => this.handleMouseLeave(index)}
-            >
+            key={index}
+            onMouseEnter={() => this.handleMouseEnter(index)}
+            onMouseLeave={() => this.handleMouseLeave(index)}
+            
+          >
               <button
                 className={`add-button ${item.showButton ? 'visible' : ''}`}
                 onClick={() => this.toggleForm(index)}
@@ -118,11 +128,12 @@ handleSubmit = (item) => {
           ))}
         </ul>
         {this.state.selectedItemIndex !== -1 && (
-          <TimeEntryForm onClose={this.closeForm} 
-          activeItem={this.state.activeItem}
-          toggle={this.toggle}
-          onSave={this.handleSubmit}
-        />
+          <TimeEntryForm
+            onClose={this.closeForm}
+            activeItem={this.state.activeItem}
+            toggle={this.toggle}
+            onSave={this.handleSubmit}
+          />
         )}
       </div>
     );

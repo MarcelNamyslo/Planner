@@ -85,4 +85,16 @@ ul {
     margin: 0;
   }
 
-  /* Add these styles to DayBlock.css */
+  .completed {
+    position: relative; /* Add relative positioning to the container */
+  }
+  
+  .completed::before {
+    content: '';
+    position: absolute;
+    top: 50%; /* Position the line in the middle of the container */
+    left: 0;
+    right: 0;
+    border-top: 1px solid #ccc; /* Customize the line's appearance */
+  }
+  
