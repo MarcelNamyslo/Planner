@@ -1,0 +1,10 @@
+.sidebar {
+  width: 13%; /* Set the width to 100 pixels */
+  background-color: #263139; /* Set the background color to dark black */
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%; /* Make the sidebar full height of the viewport */
+  overflow-y: auto; /* Add scrollbars if content overflows */
+}

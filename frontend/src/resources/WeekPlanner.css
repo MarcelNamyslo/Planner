@@ -1,0 +1,28 @@
+/* src/components/Scheduler.css */
+.scheduler {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center the day blocks */
+  align-items: center; /* Horizontally center the day blocks */
+  gap: 20px; /* Space between rows */
+  background-color: #23282b;
+}
+
+.row {
+  display: flex;
+  gap: 20px; /* Space between day blocks */
+  padding-top: 20px;
+}
+/* YourComponent.css */
+.center-image {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Set the container height to 100% of the viewport height for vertical centering */
+ 
+  /*clip-path: polygon(0 10%, 100% 10%, 100% 74%, 0 74%);*/
+}
+
+
+/* Customize styles as needed */

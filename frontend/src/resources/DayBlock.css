@@ -1,0 +1,88 @@
+/* ToDoList.css */
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  li {
+    padding-left: 10px;
+    margin-bottom: 5px; /* Add space between list items */
+    display: flex; /* Use flex layout for alignment */
+    align-items: center; /* Center items vertically */
+    
+    
+  }
+  .name-time{
+    padding-right:20px;
+    margin: 0;
+  }
+  .list-item-content {
+    flex: 1; /* Allow the content to expand and fill available space */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 10px; /* Add space between checkbox and text */
+  }
+  
+  span {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    justify-content: space-between; 
+    margin-right: 100px;
+  }
+  
+  input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    color: gray;
+     
+
+  }
+
+  .add-button {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    margin-right: 15px;
+    width: 22px;
+    height: 20px;
+    align-items: center;
+    color: white;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .add-button.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+.day-block {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+    height: 180px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 8px;
+    color: white;
+    background-color: #263139
+    /*background-color: #073b3a;*/
+  }
+  
+  
+  
+  .sunday {
+    /* Add specific styles for the last day block */
+    padding-right: 340px; /* Center vertically */
+  
+  }
+
+  .todolist{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Add these styles to DayBlock.css */
