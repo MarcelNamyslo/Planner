@@ -98,3 +98,18 @@ ul {
     border-top: 1px solid #ccc; /* Customize the line's appearance */
   }
   
+  .blockheader {
+    display: flex;
+    justify-content: space-between; 
+    margin-right: 210px;
+  }
+
+  .firstadd {
+    
+   
+    
+    align-items: center;
+    color: white;
+    background-color: transparent;
+    border: none;
+  }

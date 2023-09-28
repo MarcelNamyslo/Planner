@@ -8,7 +8,7 @@ from .models import Todo
 class TodoAdmin(admin.ModelAdmin):
  
     # add the fields of the model here
-    list_display = ("title","description","completed")
+    list_display = ("completed", "day", "time","name")
  
 # we will need to register the
 # model class and the Admin model class

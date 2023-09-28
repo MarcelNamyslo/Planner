@@ -12,19 +12,22 @@ class DayBlock extends Component {
       day: this.props.day,
       selectedItemIndex: -1, // Initialize with -1 to indicate no selected item
       activeItem: {
-        title: "vdvd",
-        description: "dfvvdf",
-        completed: false
+        completed: false,
+        time: "",
+        name: "",
+        day: "",
+        
       },
       tasklist: [
         
       ],
+      thisdaystasklist: [
+
+      ]
     };
   }
 
-  componentDidMount() {
-    this.refreshList();
-  }
+ 
 
   handleCheckboxChange = (index) => {
     const updatedItems = [...this.state.tasklist];
@@ -56,14 +59,18 @@ class DayBlock extends Component {
     this.setState({ modal: !this.state.modal });
   };
 
-  
+  componentDidMount() {
+    this.refreshList();
+  }
 
   // Submit an item
 handleSubmit = (item) => {
-  
+  item.day = this.state.day
 	this.toggle();
   console.log("11111111111")
 	alert("save" + JSON.stringify(item));
+  console.log("222222222222")
+  
   console.log("222222222222")
 	if (item.id) {
 	// if old post to edit and submit
@@ -78,28 +85,48 @@ handleSubmit = (item) => {
   console.log("44444444444444")
 	axios
 	.post("http://localhost:8000/api/tasks/", item)
-	.then((res) => this.refreshList());
+  
+	.then((res) => {
+    // Add the 'showButton' property to the new item
+    item.showButton = false;
+    this.refreshList();});
 };
 
 refreshList = () => {
 	axios //Axios to send and receive HTTP requests
 	.get("http://localhost:8000/api/tasks/")
-	.then(res => this.setState({ tasklist: res.data }))
+	.then(res => {
+    // Assuming res.data is an array of todo items with a 'day' property
+    const allTasks = res.data;
+
+    // Filter the tasks to get only those with 'day' equal to 'Monday'
+    const dayTasks = allTasks.filter(task => task.day === this.state.day);
+
+    // Set the state with the filtered list
+    this.setState({ tasklist: allTasks, thisdaystasklist: dayTasks });
+  })
 	.catch(err => console.log(err));
+  
 };
 
 
   render() {
     return (
       <div className="day-block">
+        <div className = "blockheader">
         <h2>{this.state.day}</h2>
-        <button
-                onClick={() => this.toggleForm()}
-              >
-                +
-              </button>
+        {console.log(this.state.tasklist.length)}
+        {this.state.thisdaystasklist.length === 0 && (
+            <button
+              className="firstadd"
+              onClick={() => this.toggleForm()}
+            >
+              +
+            </button>)}
+              </div>
         <ul className="todolist">
-          {this.state.tasklist.map((item, index) => (
+          {this.state.tasklist.map((item, index) => 
+            item.day === this.state.day ? (
             <li
             key={index}
             onMouseEnter={() => this.handleMouseEnter(index)}
@@ -121,11 +148,14 @@ refreshList = () => {
               <div className="list-item-content">
                 <span className={item.checked ? 'completed' : ''}>
                   <p className='name-time'>{item.time}</p>
-                  <p className='name-time'>{item.text}</p>
+                  <p className='name-time'>{item.name}</p>
                 </span>
+                
+                
               </div>
             </li>
-          ))}
+            ): null
+          )}
         </ul>
         {this.state.selectedItemIndex !== -1 && (
           <TimeEntryForm

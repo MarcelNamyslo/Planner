@@ -23,9 +23,8 @@ class YourFormComponent extends Component {
 
 handleCancel = () => {
     // Reset the form values and close the form
-    this.setTime('');
-    this.setName('');
-    this.onClose(); // Call the 'onClose' function to close the form
+    const {  onClose } = this.props;
+    onClose(); // Call the 'onClose' function to close the form
     
   };
 render() {
@@ -39,7 +38,7 @@ render() {
               <label>Time:</label>
               <input
                 type="time"
-                name="title"
+                name="time"
                 value={this.state.activeItem.time}
                 onChange={this.handleChange}
               />
@@ -48,7 +47,7 @@ render() {
               <label>Name:</label>
               <input
                 type="text"
-                name="description"
+                name="name"
                 value={this.state.activeItem.text}
                 onChange={this.handleChange}
               />
